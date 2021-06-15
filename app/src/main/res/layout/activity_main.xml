@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/teal_700"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/header_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/collapse_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:el_duration="1000"
+            app:el_expanded="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/darkGray"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/serach_by_zip_code_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:text="Search by Zip Code"/>
+
+                <EditText
+                    android:id="@+id/zip_code_title"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_below="@id/serach_by_zip_code_title"
+                    android:textColor="@color/white"
+                    android:hint="Zip code"
+                    android:textColorHint="@color/lightGray"
+                    android:layout_marginBottom="15dp"/>
+
+
+                <Button
+                    android:id="@+id/enter_zip_code_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:background="@color/buttonColor"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text="Get Weather"/>
+
+            </RelativeLayout>
+
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+        <ImageButton
+            android:id="@+id/collapse_expand_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/arrow_up"
+            android:background="@drawable/circle_shape"
+            android:layout_below="@+id/collapse_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-10dp"/>
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_container">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/lightGray2"
+                android:text="Location"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/location_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                android:text="Mountain View"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/lightGray2"
+                android:textSize="18sp"
+                android:text="Temperature"/>
+
+            <TextView
+                android:id="@+id/temperature_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:text="55.58F"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/lightGray2"
+                android:text="Wind Speed"/>
+
+            <TextView
+                android:id="@+id/wind_speed_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="10.29 mph"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/lightGray2"
+                android:text="Humidity"/>
+
+            <TextView
+                android:id="@+id/humidity_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="54%"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/lightGray2"
+                android:text="Visibility"/>
+
+            <TextView
+                android:id="@+id/visibility_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="Clear"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/lightGray2"
+                android:text="Time of Sunrise"/>
+
+            <TextView
+                android:id="@+id/time_of_sunrise_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="3/26/2018 2:01:27 PM UTC"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/lightGray2"
+                android:text="Time of Sunset"/>
+
+            <TextView
+                android:id="@+id/time_of_sunset_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="3/27/2018 2:26:26 AM UTC"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"/>
+
+
+
+
+
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>
