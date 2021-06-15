@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import com.evgeny_petrashko.nasctech_testapp.network.WeatherObject;
-import com.evgeny_petrashko.nasctech_testapp.network.jsonObjects.WeatherResponse;
 import com.evgeny_petrashko.nasctech_testapp.viewModels.WeatherViewModel;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -22,9 +21,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kotlin.Lazy;
-import retrofit2.Call;
-
-import static org.koin.core.context.ContextFunctionsKt.loadKoinModules;
 import static org.koin.java.KoinJavaComponent.inject;
 
 public class MainActivity extends AppCompatActivity {
@@ -72,23 +68,25 @@ public class MainActivity extends AppCompatActivity {
         model.refresh(zip);
     }
 
-
     private void LiveData(){
         model.getWeather().observe(this, new Observer<WeatherObject>() {
             @Override
             public void onChanged(WeatherObject weatherObject) {
-                locationTitle.setText(weatherObject.getLocation());
-                temperatureTitle.setText(weatherObject.getTemperature() + " F");
-                wind_speedTitle.setText(weatherObject.getWind_speed() + " mph");
-                humidityTitle.setText(Integer.toString(weatherObject.getHumidity()));
-                visibilityTitle.setText(weatherObject.getVisibility());
-                time_of_sunriseTitle.setText(weatherObject.getTime_sunrise());
-                time_of_sunsetTitle.setText(weatherObject.getTime_sunset());
-                Toast.makeText(MainActivity.this, "Data were updated", Toast.LENGTH_LONG).show();
+                populateView(weatherObject);
             }
         });
+    }
 
-
+    private void populateView(WeatherObject weatherObject){
+        if (weatherObject != null){
+            locationTitle.setText(weatherObject.getLocation());
+            temperatureTitle.setText(weatherObject.getTemperature() + " F");
+            wind_speedTitle.setText(weatherObject.getWind_speed() + " mph");
+            humidityTitle.setText(Integer.toString(weatherObject.getHumidity()));
+            visibilityTitle.setText(weatherObject.getVisibility());
+            time_of_sunriseTitle.setText(weatherObject.getTime_sunrise());
+            time_of_sunsetTitle.setText(weatherObject.getTime_sunset());
+        }
     }
 
 }

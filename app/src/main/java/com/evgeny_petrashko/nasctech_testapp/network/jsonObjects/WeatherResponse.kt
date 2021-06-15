@@ -1,7 +1,13 @@
 package com.evgeny_petrashko.nasctech_testapp.network.jsonObjects
 
+import android.icu.text.SimpleDateFormat
+import com.evgeny_petrashko.nasctech_testapp.network.WeatherObject
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.math.RoundingMode
+import java.text.DecimalFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class Clouds {
@@ -119,6 +125,39 @@ class WeatherResponse {
     @Expose
     var cod: Int = 0
 
+    fun translateToWeatherObject(zip: String, pattern: String): WeatherObject{
+        val weatherObject = WeatherObject(this.name)
+        weatherObject.temperature = roundOffDecimal(FromKelvinToFahrenheit(this.main!!.temp))
+        weatherObject.wind_speed = roundOffDecimal(this.wind!!.speed)
+        weatherObject.humidity = this.main!!.humidity
+        weatherObject.visibility = capitalizeString(this.weather[0].description!!)
+        var ms = (this.sys!!.sunrise.toLong() * 1000)
+        weatherObject.time_sunrise = millisecondsToDate(pattern, ms) + " UTC"
+        ms = (this.sys!!.sunset.toLong() * 1000)
+        weatherObject.time_sunset = millisecondsToDate(pattern, ms) + " UTC"
+        weatherObject.zip = zip.toInt()
+        weatherObject.timestamp = Calendar.getInstance().timeInMillis
+        return weatherObject
+    }
+
+    private fun millisecondsToDate(pattern:String, ms: Long): String{
+        val simpleDateFormat = SimpleDateFormat(pattern, Locale.ENGLISH)
+        return simpleDateFormat.format(ms)
+    }
+
+    private fun capitalizeString(report: String): String{
+        return report[0].uppercaseChar() + report.substring(1)
+    }
+
+    private fun FromKelvinToFahrenheit(kelvin: Double): Double{
+        return (kelvin * 9)/5 - 459.67
+    }
+
+    private fun roundOffDecimal(number: Double): Double {
+        val df = DecimalFormat("#.##")
+        df.roundingMode = RoundingMode.CEILING
+        return df.format(number).replace(',','.').toDouble()
+    }
 }
 
 class Wind {
